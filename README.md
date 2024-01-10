@@ -1,4 +1,4 @@
-# cofb148da91f43b763962810e
+# Scrimba Meme Generator
 
 Quick start:
 
