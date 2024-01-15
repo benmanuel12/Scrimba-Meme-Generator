@@ -15,16 +15,19 @@ export default function Meme() {
             .then(res => res.json())
             .then(data => setAllMemes(data.data.memes))
     }, [])
-    
-    
-    
-    
-    
+
+    // For the following 2 functions, the spread operator would be neater and preferable,
+    // but it doesn't seem to be recognised
+    // so on lines 36-38 I have to set all 3 keys to the old value, then overwrite the changing one
+    // as I don't know automatically which one has changed, and inserting a if/elif/else chain here
+    // is more ugly than what I've done
+
     function getMemeImage() {
         const randomNumber = Math.floor(Math.random() * allMemes.length)
         const url = allMemes[randomNumber].url
         setMeme(prevMeme => ({
-            ...prevMeme,
+            topText: prevMeme.topText,
+            bottomText: prevMeme.bottomText,
             randomImage: url
         }))
         
@@ -33,7 +36,9 @@ export default function Meme() {
     function handleChange(event) {
         const {name, value} = event.target
         setMeme(prevMeme => ({
-            ...prevMeme,
+            topText: prevMeme.topText,
+            bottomText: prevMeme.bottomText,
+            randomImage: prevMeme.randomImage,
             [name]: value
         }))
     }
